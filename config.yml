@@ -1,3 +1,8 @@
 # The config of Join and Leave
-Server Name: &1Test
-Welcome Message: &6Welcome To The Server &p!
+Server Name: Test
+Join Message: &p Joint the server!
+Leave Message: The player &p leaved the game!
+Newbie Message: Welcome the new player &p!
+
+#Newbie Notify: true/false
+Newbie Notify: false
