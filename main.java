@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,27 +30,24 @@ public class main extends JavaPlugin implements Listener{
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		Player player = e.getPlayer();
-		ChatColor.getByChar("&0").compareTo(ChatColor.BLACK);
-		ChatColor.getByChar("&1").compareTo(ChatColor.DARK_BLUE);
-		ChatColor.getByChar("&2").compareTo(ChatColor.DARK_GREEN);
-		ChatColor.getByChar("&3").compareTo(ChatColor.DARK_AQUA);
-		ChatColor.getByChar("&4").compareTo(ChatColor.DARK_RED);
-		ChatColor.getByChar("&5").compareTo(ChatColor.DARK_PURPLE);
-		ChatColor.getByChar("&6").compareTo(ChatColor.GOLD);
-		ChatColor.getByChar("&7").compareTo(ChatColor.GRAY);
-		ChatColor.getByChar("&8").compareTo(ChatColor.DARK_GRAY);
-		ChatColor.getByChar("&9").compareTo(ChatColor.BLUE);
-		ChatColor.getByChar("&a").compareTo(ChatColor.GREEN);
-		ChatColor.getByChar("&b").compareTo(ChatColor.AQUA);
-		ChatColor.getByChar("&c").compareTo(ChatColor.RED);
-		ChatColor.getByChar("&d").compareTo(ChatColor.LIGHT_PURPLE);
-		ChatColor.getByChar("&e").compareTo(ChatColor.YELLOW);
-		ChatColor.getByChar("&k").compareTo(ChatColor.MAGIC);
-		ChatColor.getByChar("&l").compareTo(ChatColor.BOLD);
-		ChatColor.getByChar("&m").compareTo(ChatColor.STRIKETHROUGH);
-		ChatColor.getByChar("&n").compareTo(ChatColor.UNDERLINE);
-		ChatColor.getByChar("&o").compareTo(ChatColor.STRIKETHROUGH);
-		ChatColor.getByChar("&r").compareTo(ChatColor.RESET);
-		e.setJoinMessage(ChatColor.WHITE + "[" + getConfig().getString("Server Name") + ChatColor.WHITE + "] " + getConfig().getString("Welcome Message").replace("&p", player.getName()));
+		if(player.hasPlayedBefore() == false) {
+			if(getConfig().getString("Newbie Notify") == "true") {
+				e.setJoinMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + getConfig().getString("Server Name") + ChatColor.WHITE + "] " + ChatColor.DARK_RED + getConfig().getString("Newbie Message"));
+				e.setJoinMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + getConfig().getString("Server Name") + ChatColor.WHITE + "] " + ChatColor.AQUA + getConfig().getString("Join Message").replace("&p", player.getName()));
+			} else if(getConfig().getString("Newbie Notify") == "false") {
+				e.setJoinMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + getConfig().getString("Server Name") + ChatColor.WHITE + "] " + ChatColor.AQUA + getConfig().getString("Join Message").replace("&p", player.getName()));
+			}else {
+				e.setJoinMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + getConfig().getString("Server Name") + ChatColor.WHITE + "] " + ChatColor.AQUA + getConfig().getString("Join Message").replace("&p", player.getName()));
+				getConfig().set("Newbie Notify", "false");
+			}
+		}else if(player.hasPlayedBefore() == true) {
+			e.setJoinMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + getConfig().getString("Server Name") + ChatColor.WHITE + "] " + ChatColor.AQUA + getConfig().getString("Join Message").replace("&p", player.getName()));
+		}
+	}
+	
+	@EventHandler
+	public void onPlayerleave(PlayerQuitEvent e) {
+		Player player = e.getPlayer();
+		e.setQuitMessage(ChatColor.WHITE + "[" + ChatColor.GOLD + getConfig().getString("Server Name") + ChatColor.WHITE + "] " + ChatColor.AQUA + getConfig().getString("Leave Message").replace("&p", player.getName()));
 	}
 }
