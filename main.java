@@ -11,10 +11,11 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class main extends JavaPlugin implements Listener {
+public class main extends JavaPlugin implements Listener{
 	
 	public void onEnable() {
 		getLogger().info("JoinandLeave loaded!");
+		getLogger().info("JoinandLeave created by tv15dsi!");
 		PluginManager pm = getServer().getPluginManager();
 		getConfig().options().copyDefaults(true);
 		pm.registerEvents(this, this);
@@ -22,6 +23,7 @@ public class main extends JavaPlugin implements Listener {
 	}
 	public void onDisable() {
 		getLogger().info("JoinandLeave stopped!");
+		getLogger().info("JoinandLeave created by tv15dsi!");
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		return false;
