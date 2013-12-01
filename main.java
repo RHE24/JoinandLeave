@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class main extends JavaPlugin implements Listener{
+public class main extends JavaPlugin implements Listener {
 	
 	public void onEnable() {
 		getLogger().info("JoinandLeave loaded!");
