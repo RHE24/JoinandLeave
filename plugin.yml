@@ -1,6 +1,6 @@
 name: JoinandLeave
 author: tv15dsi
-version: 1.0.0
+version: 1.0.1
 description: The Join and Leave plugin!
 main: me.tv15dsi.JoinandLeave.main
 commands:
